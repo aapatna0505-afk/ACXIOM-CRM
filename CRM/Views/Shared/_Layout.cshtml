@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - CRM System</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 100vh;
+            width: 260px;
+            background-color: #1f2937;
+            position: fixed;
+            padding-top: 20px;
+            color: white;
+            z-index: 1000;
+        }
+
+            .sidebar h3 {
+                padding-left: 20px;
+                margin-bottom: 30px;
+                font-weight: bold;
+            }
+
+            .sidebar a, .sidebar button {
+                padding: 12px 20px;
+                display: flex;
+                align-items: center;
+                color: white;
+                text-decoration: none;
+                font-size: 16px;
+                border-radius: 8px;
+                margin: 5px 10px;
+                transition: background-color 0.2s;
+            }
+
+                .sidebar a:hover, .sidebar button:hover {
+                    background-color: #374151;
+                }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+
+        .active-menu {
+            background-color: #2563eb !important;
+            font-weight: bold;
+        }
+
+        .sidebar i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h3>🚀 CRM System</h3>
+
+        <!-- Changed Home → Dashboard -->
+        <a asp-controller="Home" asp-action="Index" data-path="/home/index">
+            <i class="bi bi-speedometer"></i> Dashboard
+        </a>
+
+        <a asp-controller="Customers" asp-action="Index" data-path="/customers/index">
+            <i class="bi bi-person-circle"></i> Customers
+        </a>
+        <a asp-controller="Employees" asp-action="Index" data-path="/employees/index">
+            <i class="bi bi-briefcase"></i> Employees
+        </a>
+
+        <hr style="border-top: 1px solid #374151; margin: 15px 10px;">
+
+        <a asp-controller="Search" asp-action="Index" data-path="/search/index">
+            <i class="bi bi-search"></i> Search All
+        </a>
+
+        <a asp-controller="Report" asp-action="Generate" data-path="/report/generate">
+            <i class="bi bi-file-earmark-bar-graph"></i> Reports
+        </a>
+
+        <!-- ❌ Removed extra Dashboard option here -->
+
+        <hr style="border-top: 1px solid #374151; margin: 15px 10px;">
+
+        <a asp-controller="Home" asp-action="Privacy" data-path="/home/privacy">
+            <i class="bi bi-gear"></i> Settings
+        </a>
+
+        <form asp-controller="Account" asp-action="Logout" method="post" class="w-100">
+            <button type="submit" class="btn btn-link text-white text-decoration-none w-100" style="text-align: left; padding: 12px 20px;">
+                <i class="bi bi-box-arrow-right"></i> Logout
+            </button>
+        </form>
+
+    </div>
+
+    <div class="main-content">
+        @RenderBody()
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let currentPath = window.location.pathname.toLowerCase();
+
+            if (currentPath.length > 1 && currentPath.endsWith('/')) {
+                currentPath = currentPath.slice(0, -1);
+            }
+            if (!currentPath.startsWith('/')) {
+                currentPath = '/' + currentPath;
+            }
+
+            const segments = currentPath.split('/');
+            const controllerOnlyPath = segments.length > 2 ? '/' + segments[1] : currentPath;
+
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
+
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active-menu');
+                let linkPath = new URL(link.href, window.location.origin).pathname.toLowerCase();
+
+                if (linkPath.length > 1 && linkPath.endsWith('/')) {
+                    linkPath = linkPath.slice(0, -1);
+                }
+
+                if (currentPath === linkPath) {
+                    link.classList.add('active-menu');
+                    return;
+                }
+
+                const linkControllerBase = linkPath.split('/').slice(0, 2).join('/');
+                const currentControllerBase = currentPath.split('/').slice(0, 2).join('/');
+
+                if (linkPath.endsWith('/index') && linkControllerBase === currentControllerBase && linkControllerBase !== '/') {
+                    link.classList.add('active-menu');
+                    return;
+                }
+
+                if (linkPath === '/home/index' && (currentPath === '/' || currentPath === '/home')) {
+                    link.classList.add('active-menu');
+                    return;
+                }
+            });
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>
