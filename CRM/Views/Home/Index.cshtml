@@ -2,102 +2,211 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="container-fluid">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
 
-    <div class="p-5 mb-5 bg-light rounded-4 shadow-sm border border-secondary border-opacity-10">
-        <div class="d-flex justify-content-between align-items-center">
-            <div>
-                <h1 class="display-5 fw-bold text-dark">Welcome👋</h1>
-                <p class="fs-4 text-muted">Your command center for customer success.</p>
-            </div>
-            <div>
-                <a asp-controller="Report" asp-action="Generate" class="btn btn-primary btn-lg shadow-sm" style="min-width: 200px;">
-                    <i class="bi bi-speedometer2 me-2"></i> View Dashboard
-                </a>
-            </div>
-        </div>
-    </div>
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
 
-    <div class="row g-4">
+    <style>
+        body {
+            background-image: url('https://bluesapphireit.com/wp-content/uploads/2024/02/customer-relationship-management-concept-min-scaled.jpg'); /* your background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: "Segoe UI", sans-serif;
+        }
 
-        <div class="col-md-4">
-            <div class="card shadow-sm border-start border-4 border-primary rounded-4 h-100">
-                <div class="card-body p-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="bi bi-people-fill text-primary" style="font-size: 2rem;"></i>
-                        <h5 class="fw-bold ms-3 mb-0">Customers</h5>
-                    </div>
-                    <p class="text-muted">Manage your customer records, track interactions, and see history.</p>
-                    <a asp-controller="Customers" asp-action="Index" class="btn btn-outline-primary w-100 mt-2">
-                        Go to Customers <i class="bi bi-arrow-right"></i>
+        /* Screenshot-like premium card */
+        .screenshot-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+            transition: 0.3s ease;
+            text-align: center;
+        }
+
+            .screenshot-card:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+            }
+
+        /* Top gradient header */
+        .s-card-header {
+            padding: 35px 20px;
+            color: #fff;
+        }
+
+        .bg-primary-gradient {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+        }
+
+        .bg-success-gradient {
+            background: linear-gradient(135deg, #28a745, #20c997);
+        }
+
+        .bg-info-gradient {
+            background: linear-gradient(135deg, #17a2b8, #6dd5ed);
+        }
+
+        .s-title {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .s-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .s-icons i {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 14px 16px;
+            border-radius: 50%;
+            font-size: 30px;
+        }
+
+        .s-card-body {
+            padding: 25px 30px;
+            font-size: 15px;
+        }
+
+        .s-btn {
+            margin-top: 15px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+
+        <!-- Welcome Banner -->
+        <div class="p-5 mb-5 bg-light rounded-4 shadow-sm border border-secondary border-opacity-10">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="display-5 fw-bold text-dark">Welcome 👋</h1>
+                    <p class="fs-4 text-muted">Your command center for customer success.</p>
+                </div>
+                <div>
+                    <a asp-controller="Report" asp-action="Generate" class="btn btn-primary btn-lg shadow-sm" style="min-width: 200px;">
+                        <i class="bi bi-speedometer2 me-2"></i> View Dashboard
                     </a>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card shadow-sm border-start border-4 border-success rounded-4 h-100">
-                <div class="card-body p-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="bi bi-briefcase-fill text-success" style="font-size: 2rem;"></i>
-                        <h5 class="fw-bold ms-3 mb-0">Employees</h5>
+        <!-- Screenshot-Style Cards -->
+        <div class="row g-4">
+
+            <!-- Customers -->
+            <div class="col-md-4">
+                <div class="screenshot-card">
+                    <div class="s-card-header bg-primary-gradient">
+                        <h3 class="s-title">Customers</h3>
+                        <p class="s-subtitle">Customer Management</p>
+                        <div class="s-icons"><i class="bi bi-people-fill"></i></div>
                     </div>
-                    <p class="text-muted">View and manage employee details, roles, and contact information.</p>
-                    <a asp-controller="Employees" asp-action="Index" class="btn btn-outline-success w-100 mt-2">
-                        Go to Employees <i class="bi bi-arrow-right"></i>
-                    </a>
+
+                    <div class="s-card-body">
+                        <p class="text-muted">
+                            Manage customer records, track interactions, and view activity history.
+                        </p>
+                        <a asp-controller="Customers" asp-action="Index" class="btn btn-primary s-btn">
+                            Explore Customers
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-4">
-            <div class="card shadow-sm border-start border-4 border-info rounded-4 h-100">
-                <div class="card-body p-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="bi bi-bar-chart-fill text-info" style="font-size: 2rem;"></i>
-                        <h5 class="fw-bold ms-3 mb-0">Reports & Analytics</h5>
+            <!-- Employees -->
+            <div class="col-md-4">
+                <div class="screenshot-card">
+                    <div class="s-card-header bg-success-gradient">
+                        <h3 class="s-title">Employees</h3>
+                        <p class="s-subtitle">Employee Directory</p>
+                        <div class="s-icons"><i class="bi bi-briefcase-fill"></i></div>
                     </div>
-                    <p class="text-muted">View key insights, performance metrics, and business reports.</p>
-                    <a asp-controller="Report" asp-action="Generate" class="btn btn-outline-info w-100 mt-2">
-                        Open Report <i class="bi bi-arrow-right"></i>
-                    </a>
+
+                    <div class="s-card-body">
+                        <p class="text-muted">
+                            View and manage employee details, roles, and contact information.
+                        </p>
+                        <a asp-controller="Employees" asp-action="Index" class="btn btn-success s-btn">
+                            Explore Employees
+                        </a>
+                    </div>
                 </div>
             </div>
+
+            <!-- Reports -->
+            <div class="col-md-4">
+                <div class="screenshot-card">
+                    <div class="s-card-header bg-info-gradient">
+                        <h3 class="s-title">Reports & Analytics</h3>
+                        <p class="s-subtitle">Dashboard Insights</p>
+                        <div class="s-icons"><i class="bi bi-bar-chart-fill"></i></div>
+                    </div>
+
+                    <div class="s-card-body">
+                        <p class="text-muted">
+                            View insights, business metrics, and performance analytics.
+                        </p>
+                        <a asp-controller="Report" asp-action="Generate" class="btn btn-info s-btn">
+                            Open Reports
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-    </div>
+        @* <!-- System Capabilities -->
+        <div class="card shadow-sm border-0 rounded-4 mt-5 p-4 bg-white">
+            <h4 class="fw-bold mb-3 text-secondary">
+                <i class="bi bi-info-circle-fill me-2"></i> System Capabilities
+            </h4> *@
 
-    <div class="card shadow-sm border-0 rounded-4 mt-5 p-4 bg-white">
-        <h4 class="fw-bold mb-3 text-secondary">
-            <i class="bi bi-info-circle-fill me-2"></i> System Capabilities
-        </h4>
+    @*         <p class="lead text-muted border-bottom pb-3">
+                This CRM platform is designed to streamline your business operations and provide real-time performance insights.
+            </p>
 
-        <p class="lead text-muted border-bottom pb-3">
-            This CRM platform is designed to streamline your business operations and provide real-time performance insights.
-        </p>
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i> Comprehensive Customer Management
+                        </li>
+                        <li class="list-group-item">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i> Employee Detail Tracking
+                        </li>
+                    </ul>
+                </div>
 
-        <div class="row">
-            <div class="col-md-6">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <i class="bi bi-check-circle-fill text-success me-2"></i> Comprehensive Customer Management
-                    </li>
-                    <li class="list-group-item">
-                        <i class="bi bi-check-circle-fill text-success me-2"></i> Employee Detail Tracking
-                    </li>
-                </ul>
+                <div class="col-md-6">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i> Real-Time Report Generation
+                        </li>
+                        <li class="list-group-item">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i> Responsive & Intuitive Dashboard
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-md-6">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <i class="bi bi-check-circle-fill text-success me-2"></i> Real-Time Report Generation
-                    </li>
-                    <li class="list-group-item">
-                        <i class="bi bi-check-circle-fill text-success me-2"></i> Responsive & Intuitive Dashboard
-                    </li>
-                </ul>
-            </div>
+
         </div>
-    </div>
 
-</div>
+    </div> *@
+
+</body>
+</html>

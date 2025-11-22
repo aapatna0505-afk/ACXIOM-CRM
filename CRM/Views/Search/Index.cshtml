@@ -9,90 +9,119 @@
     ViewData["Title"] = "CRM Search";
 }
 
+<!-- Background + Overlay Styling -->
+<style>
+    body {
+        background: url('/images/crm-bg.jpg') no-repeat center center fixed;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .overlay-box {
+        background: rgba(255, 255, 255, 0.78);
+        padding: 40px;
+        border-radius: 14px;
+        backdrop-filter: blur(4px);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    table th, table td {
+        vertical-align: middle;
+    }
+</style>
+
 <div class="container-fluid">
-    <h2 class="fw-bold mb-4">🔍 Search CRM Records</h2>
+    <div class="overlay-box">
 
-    <form asp-controller="Search" asp-action="Index" method="get" class="mb-5">
-        <div class="input-group input-group-lg shadow-sm">
-            <input type="search"
-                   name="query"
-                   class="form-control"
-                   placeholder="Search by Email, Name, or Phone..."
-                   value="@Model.SearchTerm" />
-            <button class="btn btn-primary" type="submit">Search</button>
-        </div>
-        @if (!string.IsNullOrWhiteSpace(Model.SearchTerm))
-        {
-            <p class="text-muted mt-2">Showing results for: <strong>"@Model.SearchTerm"</strong></p>
-        }
-    </form>
+        <h2 class="fw-bold mb-4">🔍 Search CRM Records</h2>
 
-    @if (string.IsNullOrWhiteSpace(Model.SearchTerm))
-    {
-        <div class="alert alert-info">Enter a term above to start searching customers and employees.</div>
-    }
-    else if (!Model.Customers.Any() && !Model.Employees.Any())
-    {
-        <div class="alert alert-warning">No results found for "@Model.SearchTerm".</div>
-    }
-    else
-    {
-        @if (Model.Customers.Any())
-        {
-            <h4 class="mt-5 mb-3">👥 Customer Results (@Model.Customers.Count)</h4>
-            <div class="table-responsive">
-                <table class="table table-hover table-striped shadow-sm">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var customer in Model.Customers)
-                        {
-                            <tr>
-                                @* FIXES: Changed to lowercase property access *@
-                                <td>@customer.name</td>
-                                <td>@customer.email</td>
-                                <td>@customer.phoneNumber</td> @* Assuming 'Phone' in table header uses the 'phoneNumber' property *@
-                                <td><a asp-controller="Customers" asp-action="Details" asp-route-id="@customer.Id" class="btn btn-sm btn-info text-white">View</a></td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+        <form asp-controller="Search" asp-action="Index" method="get" class="mb-5">
+            <div class="input-group input-group-lg shadow-sm">
+                <input type="search"
+                       name="query"
+                       class="form-control"
+                       placeholder="Search by Email, Name, or Phone..."
+                       value="@Model.SearchTerm" />
+                <button class="btn btn-primary" type="submit">Search</button>
             </div>
-        }
 
-        @if (Model.Employees.Any())
+            @if (!string.IsNullOrWhiteSpace(Model.SearchTerm))
+            {
+                <p class="text-muted mt-2">Showing results for: <strong>"@Model.SearchTerm"</strong></p>
+            }
+        </form>
+
+        @if (string.IsNullOrWhiteSpace(Model.SearchTerm))
         {
-            <h4 class="mt-5 mb-3">🧑‍💼 Employee Results (@Model.Employees.Count)</h4>
-            <div class="table-responsive">
-                <table class="table table-hover table-striped shadow-sm">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Department</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var employee in Model.Employees)
-                        {
-                            <tr>
-                                @* FIXES: Changed to lowercase property access *@
-                                <td>@employee.name</td>
-                                <td>@employee.email</td>
-                                <td>@employee.position</td> @* Changed from Department to department *@
-                                <td><a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id" class="btn btn-sm btn-info text-white">View</a></td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+            <div class="alert alert-info">Enter a term above to start searching customers and employees.</div>
         }
-    }
+        else if (!Model.Customers.Any() && !Model.Employees.Any())
+        {
+            <div class="alert alert-warning">No results found for "@Model.SearchTerm".</div>
+        }
+        else
+        {
+            @if (Model.Customers.Any())
+            {
+                <h4 class="mt-5 mb-3">👥 Customer Results (@Model.Customers.Count)</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped shadow-sm">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var customer in Model.Customers)
+                            {
+                                <tr>
+                                    <td>@customer.name</td>
+                                    <td>@customer.email</td>
+                                    <td>@customer.phoneNumber</td>
+                                    <td>
+                                        <a asp-controller="Customers" asp-action="Details" asp-route-id="@customer.Id" class="btn btn-sm btn-info text-white">View</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+
+            @if (Model.Employees.Any())
+            {
+                <h4 class="mt-5 mb-3">🧑‍💼 Employee Results (@Model.Employees.Count)</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped shadow-sm">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Department</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var employee in Model.Employees)
+                            {
+                                <tr>
+                                    <td>@employee.name</td>
+                                    <td>@employee.email</td>
+                                    <td>@employee.position</td>
+                                    <td>
+                                        <a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id" class="btn btn-sm btn-info text-white">View</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
+    </div>
 </div>
