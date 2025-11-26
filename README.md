@@ -6,7 +6,7 @@ Welcome to your smart platform for modern customer and employee management. This
 The CRM System offers standard authentication methods for secure access:
 
 
-Login: Users with existing accounts can sign in using their registered Email and Password. An example email shown is harshrai24685@gmail.com.
+Login: Users with existing accounts can sign in using their registered Email and Password. An example email shown is aapatna0505@gmail.com.
 
 
 
@@ -60,7 +60,7 @@ Search/Filter: Search customers by name, email, or phone.
 Recent Data: Displays a table of recent customer information, including Name, Email, Phone, and available Actions.
 
 
-Example Customer: prakhar singh with email harshrai24685@gmail.com and phone 07651938516.
+Example Customer: harsh kumar rai with email aapatna0505@gmail.com and phone 7563975655.
 
 2. Employee Management (Employee Directory)
 This module is used to view and manage employee details, roles, and contact information.
@@ -84,7 +84,7 @@ Search: Search employees by name, position, or email.
 Current Staff Roster: Displays a table including Name, Email, Phone, Position, and Actions.
 
 
-Example Employee: Harsh Kumar Rai in the Technical position, with email harshrai24685@gmail.com and phone 07651938516.
+Example Employee: Abhishek Anand in the Technical position, with email aapatna0505@gmail.com and phone 7563975655.
 
 
 📊 Reports & Analytics
