@@ -125,7 +125,7 @@ The Settings section manages system and user-specific configurations.
 
 
 
-User & Privacy: Displays details such as the user's ROLE (e.g., User) and EMAIL (e.g., harshrai24685@gmail.com). This section displays current session and role information.
+User & Privacy: Displays details such as the user's ROLE (e.g., User) and EMAIL (e.g., aapatna0505@gmail.com). This section displays current session and role information.
 
 
 
